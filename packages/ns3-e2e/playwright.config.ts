@@ -1,6 +1,18 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 
-const BASE_URL = process.env['BASE_URL'];
+// This matches the value of `--configuration=...` and is set by Nx CLI.
+const NX_TASK_TARGET_CONFIGURATION =
+  process.env['NX_TASK_TARGET_CONFIGURATION'];
+
+const BASE_URL =
+  process.env['BASE_URL'] ?? NX_TASK_TARGET_CONFIGURATION === 'local'
+    ? 'http://127.0.0.1:4200'
+    : 'http://example.com';
+
+const WEB_SERVER_CMD =
+  NX_TASK_TARGET_CONFIGURATION === 'local'
+    ? 'nx run demo:serve:development'
+    : 'nx run demo:serve:production';
 
 const config: PlaywrightTestConfig = {
   testDir: './tests',
@@ -16,6 +28,14 @@ const config: PlaywrightTestConfig = {
     baseURL: BASE_URL,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+  },
+  webServer: {
+    cwd: '../../',
+    command: WEB_SERVER_CMD,
+    url: BASE_URL,
+    reuseExistingServer: !process.env.CI,
+    stdout: 'ignore',
+    stderr: 'pipe',
   },
 };
 

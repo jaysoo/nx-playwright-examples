@@ -5,17 +5,13 @@
   "sourceRoot": "packages/nxkit-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nxkit/playwright:test",
+      "executor": "@nx/playwright:playwright",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
-        "outputPath": "dist/packages/nxkit-e2e/test-results",
-        "playwrightConfig": "packages/nxkit-e2e/playwright.config.ts",
-        "devServerTarget": "demo:serve:development"
+        "config": "playwright.config.ts"
       },
       "configurations": {
-        "production": {
-          "devServerTarget": "demo:serve:production"
-        }
+        "production": {}
       }
     },
     "debug": {
