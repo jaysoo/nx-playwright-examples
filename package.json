@@ -1,0 +1,20 @@
+{
+  "name": "@playwright-examples/source",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {},
+  "private": true,
+  "devDependencies": {
+    "@mands/nx-playwright": "^0.6.2",
+    "@ns3/nx-playwright": "^4.2.0",
+    "@nx-extend/e2e-runner": "^6.1.0",
+    "@nx-extend/playwright": "^4.1.0",
+    "@nx/js": "16.5.3",
+    "@nx/react": "16.5.3",
+    "@nx/workspace": "16.5.3",
+    "@nxkit/playwright": "^3.0.2",
+    "nx": "16.5.3",
+    "prettier": "^2.6.2",
+    "typescript": "~5.1.3"
+  }
+}
