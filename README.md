@@ -47,6 +47,9 @@ import { defineConfig } from '@playwright/test';
 export default defineConfig({
   // Run your local dev server before starting the tests
   webServer: {
+    // Needs to be relative path to workspace root, or else serve will fail.
+    // TODO: If we set cwd from executor to workpace root then this is not needed.
+    cwd: '../../',
     command: 'nx serve my-app',
     url: 'http://127.0.0.1:4200',
     reuseExistingServer: !process.env.CI,
@@ -66,9 +69,13 @@ For the `@nx-extend/e2e-runner` plugin, the custom `targets` option can continue
 
 The `@ns3/nx-playwright` plugin uses `command` to determine which Playwright CLI command to run (e.g. `playwright test` to run e2e tests). Our design is that `@nx/playwright:playwright` is solely used for e2e testing (same as `@nx/cypress:cypress`), thus is did not make sense to support more commands from the executor.
 
-### `playwrightConfig`
+#### `playwrightConfig`
 
 This option is just `config` for `@nx/playwright:playwright` executor. Behavior remains the same.
+
+#### `outputPath`
+
+Since Playwright uses the `outputDir` option already to control where results are written to, we don't need another option to do the same thing. The only consideration here is that if the user customizes this value then they need to update `project.json` to the outputs are cached correctly.
 
 ### `playwright.config.ts` changes
 
@@ -88,3 +95,11 @@ In practice, we will be adding `--e2eTestRunner=playwright` to all app generator
 nx g @nx/workspace:lib my-app-e2e
 nx g @nx/playwright:configuration --project=my-app-e2e
 ```
+
+### Additional thoughts
+
+Some other notes, in no particular order for things the team has discussed.
+
+- We may create an Nx plugin for Playwright to help ease migrations. This plugin can bridge the cap between `devServerTarget` and `webServer` for example.
+- Add correct `outputs` (in `project.json`) config for `outputDir` so caching will work.
+
