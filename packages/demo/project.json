@@ -24,7 +24,8 @@
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "demo:build"
+        "buildTarget": "demo:build",
+        "host": "127.0.0.1"
       },
       "configurations": {
         "development": {

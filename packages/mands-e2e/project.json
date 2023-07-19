@@ -1,0 +1,40 @@
+{
+  "name": "mands-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/mands-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@mands/nx-playwright:playwright-executor",
+      "options": {
+        "e2eFolder": "packages/mands-e2e",
+        "devServerTarget": "demo:serve",
+        "packageRunner": "pnpm"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "demo:serve:production"
+        }
+      }
+    },
+    "ts-check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "tsc --build --force --verbose apps/demo-e2e/tsconfig.json"
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/mands-e2e/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["demo"]
+}
