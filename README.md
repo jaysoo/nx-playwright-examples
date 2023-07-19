@@ -28,7 +28,7 @@ pnpm nx-release 17.0.0 --verbose
 
 Now you can install `@nx/playwrigh@17.0.0` locally.
 
-The `migration` branch is the one we will use to show changes for each project to switch to `@nx/playwright:playwright` executor.
+The [`migration` branch](https://github.com/jaysoo/nx-playwright-examples/pull/1) is the one we will use to show changes for each project to switch to `@nx/playwright:playwright` executor.
 
 ## Notes
 
