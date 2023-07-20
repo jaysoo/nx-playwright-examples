@@ -9,7 +9,14 @@
       "options": {
         "command": "playwright test",
         "config": "packages/ns3-e2e/playwright.config.ts",
-        "devServerTarget": "demo:serve"
+        "devServerTarget": "demo:serve:production",
+        "baseUrl": "http://example.com"
+      },
+      "configurations": {
+        "local": {
+          "devServerTarget": "demo:serve:development",
+          "baseUrl": "http://localhost:4200"
+        }
       }
     },
     "lint": {
