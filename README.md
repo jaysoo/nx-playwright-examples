@@ -12,7 +12,7 @@ These are the plugins we are testing with:
 In the main branch you can run the follow to see all tests passing with the community plugin:
 
 ```shell
-nx run-many -t=e2e --no-parallel --verbose
+nx run-many -t=e2e --no-parallel --verbose --configuration=local
 ```
 
 ## Migrating to `@nx/playwright`
@@ -102,4 +102,3 @@ Some other notes, in no particular order for things the team has discussed.
 
 - We may create an Nx plugin for Playwright to help ease migrations. This plugin can bridge the cap between `devServerTarget` and `webServer` for example.
 - Add correct `outputs` (in `project.json`) config for `outputDir` so caching will work.
-
