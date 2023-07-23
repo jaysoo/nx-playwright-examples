@@ -10,7 +10,15 @@ const config: PlaywrightTestConfig = {
     ignoreHTTPSErrors: true,
     video: 'on-first-retry',
     screenshot: 'only-on-failure',
-    // baseURL: 'http://localhost:4200'
+    baseURL: 'http://127.0.0.1:4200',
+  },
+  webServer: {
+    cwd: '../../',
+    command: 'nx run demo:serve',
+    url: 'http://127.0.0.1:4200',
+    reuseExistingServer: !process.env.CI,
+    stdout: 'ignore',
+    stderr: 'pipe',
   },
 };
 

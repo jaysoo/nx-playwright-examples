@@ -5,18 +5,10 @@
   "projectType": "application",
   "targets": {
     "e2e": {
-      "executor": "@ns3/nx-playwright:playwright",
-      "options": {
-        "command": "playwright test",
-        "config": "packages/ns3-e2e/playwright.config.ts",
-        "devServerTarget": "demo:serve:production",
-        "baseUrl": "http://example.com"
-      },
+      "executor": "@nx/playwright:playwright",
+      "options": {},
       "configurations": {
-        "local": {
-          "devServerTarget": "demo:serve:development",
-          "baseUrl": "http://localhost:4200"
-        }
+        "local": {}
       }
     },
     "lint": {

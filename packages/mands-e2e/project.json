@@ -5,16 +5,9 @@
   "projectType": "application",
   "targets": {
     "e2e": {
-      "executor": "@mands/nx-playwright:playwright-executor",
-      "options": {
-        "e2eFolder": "packages/mands-e2e",
-        "devServerTarget": "demo:serve",
-        "packageRunner": "pnpm"
-      },
+      "executor": "@nx/playwright:playwright",
       "configurations": {
-        "production": {
-          "devServerTarget": "demo:serve:production"
-        }
+        "production": {}
       }
     },
     "ts-check": {

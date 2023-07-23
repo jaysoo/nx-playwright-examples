@@ -11,7 +11,11 @@ import { devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration for more information
  */
 
-const baseURL = process.env.E2E_BASE_URL || 'http://localhost:4200/';
+// This matches the value of `--configuration=...` and is set by Nx CLI.
+const NX_TASK_TARGET_CONFIGURATION =
+  process.env['NX_TASK_TARGET_CONFIGURATION'];
+
+const baseURL = process.env.E2E_BASE_URL || 'http://127.0.0.1:4200/';
 
 export const config: PlaywrightTestConfig = {
   testDir: './src/e2e',
@@ -25,6 +29,17 @@ export const config: PlaywrightTestConfig = {
     actionTimeout: 0,
     baseURL,
     trace: 'on-first-retry',
+  },
+  webServer: {
+    cwd: '../../',
+    command:
+      NX_TASK_TARGET_CONFIGURATION === 'production'
+        ? 'nx run demo:serve:production'
+        : 'nx run demo:serve:development',
+    url: 'http://127.0.0.1:4200',
+    reuseExistingServer: !process.env.CI,
+    stdout: 'ignore',
+    stderr: 'pipe',
   },
   reporter: [
     [

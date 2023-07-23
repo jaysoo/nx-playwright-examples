@@ -5,18 +5,9 @@
   "sourceRoot": "packages/nx-extend-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nx-extend/e2e-runner:run",
-      "options": {
-        "runner": "playwright",
-        "targets": [
-          {
-            "target": "demo:serve",
-            "// checkUrl": "Since axios does not accept text/html by default, point to a JSON file",
-            "checkUrl": "http://127.0.0.1:4200/test.json",
-            "checkMaxTries": 50
-          }
-        ]
-      }
+      "// executor": "If @nx-extend/e2e-runner integrates with @nx/playwright then no changes are needed",
+      "executor": "@nx/playwright:playwright",
+      "options": {}
     },
     "codegen": {
       "executor": "@nx-extend/playwright:codegen",
